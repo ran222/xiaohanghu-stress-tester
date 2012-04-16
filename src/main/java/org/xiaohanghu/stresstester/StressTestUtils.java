@@ -5,7 +5,7 @@ import java.io.StringWriter;
 import org.xiaohanghu.stresstester.core.SimpleResultFormater;
 import org.xiaohanghu.stresstester.core.StressResultFormater;
 import org.xiaohanghu.stresstester.core.StressTask;
-import org.xiaohanghu.stresstester.core.StressEngine;
+import org.xiaohanghu.stresstester.core.StressTester;
 import org.xiaohanghu.stresstester.core.StressResult;
 
 /**
@@ -13,17 +13,17 @@ import org.xiaohanghu.stresstester.core.StressResult;
  */
 public class StressTestUtils {
 
-	private static StressEngine stressEngine = new StressEngine();
+	private static StressTester stressTester = new StressTester();
 	private static SimpleResultFormater simpleResultFormater = new SimpleResultFormater();
 
 	public static StressResult test(int concurrencyLevel, int totalRequests,
 			StressTask stressTask) {
-		return stressEngine.test(concurrencyLevel, totalRequests, stressTask);
+		return stressTester.test(concurrencyLevel, totalRequests, stressTask);
 	}
 
 	public static StressResult test(int concurrencyLevel, int totalRequests,
 			StressTask stressTask, int warmUpTime) {
-		return stressEngine.test(concurrencyLevel, totalRequests, stressTask,
+		return stressTester.test(concurrencyLevel, totalRequests, stressTask,
 				warmUpTime);
 	}
 
