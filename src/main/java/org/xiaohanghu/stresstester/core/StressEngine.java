@@ -1,4 +1,4 @@
-package org.xiaohanghu.stresstester;
+package org.xiaohanghu.stresstester.core;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,8 +16,8 @@ import org.apache.commons.logging.LogFactory;
  * Created by IntelliJ IDEA. User: yubaofu Date: 12-2-23 Time: ����6:30 To
  * change this template use File | Settings | File Templates.
  */
-public class StressTestEngine {
-	private static Log log = LogFactory.getLog(StressTestEngine.class);
+public class StressEngine {
+	private static Log log = LogFactory.getLog(StressEngine.class);
 
 	private int defaultWarmUpTime = 1600;
 
@@ -36,7 +36,7 @@ public class StressTestEngine {
 
 	protected static void warnSelf() {
 		for (int i = 0; i < 50; i++) {
-			StressTestEngine benchmark = new StressTestEngine();
+			StressEngine benchmark = new StressEngine();
 			benchmark.test(10, 100, null, 0);
 		}
 	}
@@ -53,13 +53,13 @@ public class StressTestEngine {
 		}
 	}
 
-	public StressTestResult test(int concurrencyLevel, int totalRequests,
+	public StressResult test(int concurrencyLevel, int totalRequests,
 			StressTask stressTask) {
 		return test(concurrencyLevel, totalRequests, stressTask,
 				defaultWarmUpTime);
 	}
 
-	public StressTestResult test(int concurrencyLevel, int totalRequests,
+	public StressResult test(int concurrencyLevel, int totalRequests,
 			StressTask stressTask, int warmUpTime) {
 
 		if (null == stressTask) {
@@ -71,12 +71,12 @@ public class StressTestEngine {
 		CountDownLatch threadEndLatch = new CountDownLatch(concurrencyLevel);
 		AtomicInteger failedCounter = new AtomicInteger();
 
-		StressTestContext stressTestContext = new StressTestContext();
-		stressTestContext.setTestService(stressTask);
-		stressTestContext.setEveryThreadCount(everyThreadCount);
-		stressTestContext.setThreadStartBarrier(threadStartBarrier);
-		stressTestContext.setThreadEndLatch(threadEndLatch);
-		stressTestContext.setFailedCounter(failedCounter);
+		StressContext stressContext = new StressContext();
+		stressContext.setTestService(stressTask);
+		stressContext.setEveryThreadCount(everyThreadCount);
+		stressContext.setThreadStartBarrier(threadStartBarrier);
+		stressContext.setThreadEndLatch(threadEndLatch);
+		stressContext.setFailedCounter(failedCounter);
 
 		ExecutorService executorService = Executors
 				.newFixedThreadPool(concurrencyLevel);
@@ -84,7 +84,7 @@ public class StressTestEngine {
 		List<StressThreadWorker> workers = new ArrayList<StressThreadWorker>(
 				concurrencyLevel);
 		for (int i = 0; i < concurrencyLevel; i++) {
-			StressThreadWorker worker = new StressThreadWorker(stressTestContext,
+			StressThreadWorker worker = new StressThreadWorker(stressContext,
 					everyThreadCount);
 			workers.add(worker);
 		}
@@ -108,22 +108,22 @@ public class StressTestEngine {
 		// long startLimit = testContext.getStartTime() - start;
 		int realTotalRequests = everyThreadCount * concurrencyLevel;
 		int failedRequests = failedCounter.get();
-		StressTestResult stressTestResult = new StressTestResult();
+		StressResult stressResult = new StressResult();
 
 		SortResult sortResult = getSortedTimes(workers);
 		List<Long> allTimes = sortResult.allTimes;
 
-		stressTestResult.setAllTimes(allTimes);
+		stressResult.setAllTimes(allTimes);
 		List<Long> trheadTimes = sortResult.trheadTimes;
 		long totalTime = trheadTimes.get(trheadTimes.size() - 1);
 
-		stressTestResult.setTestsTakenTime(totalTime);
-		stressTestResult.setFailedRequests(failedRequests);
-		stressTestResult.setTotalRequests(realTotalRequests);
-		stressTestResult.setConcurrencyLevel(concurrencyLevel);
-		stressTestResult.setWorkers(workers);
+		stressResult.setTestsTakenTime(totalTime);
+		stressResult.setFailedRequests(failedRequests);
+		stressResult.setTotalRequests(realTotalRequests);
+		stressResult.setConcurrencyLevel(concurrencyLevel);
+		stressResult.setWorkers(workers);
 
-		return stressTestResult;
+		return stressResult;
 
 	}
 

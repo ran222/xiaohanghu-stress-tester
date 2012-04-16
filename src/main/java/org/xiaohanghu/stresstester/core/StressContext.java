@@ -1,4 +1,4 @@
-package org.xiaohanghu.stresstester;
+package org.xiaohanghu.stresstester.core;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author xiaohanghu
  * */
-public class StressTestContext {
+public class StressContext {
 
 	// 每个线程的测试次数
 	private int everyThreadCount;

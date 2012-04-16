@@ -1,4 +1,4 @@
-package org.xiaohanghu.stresstester;
+package org.xiaohanghu.stresstester.core;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,16 +25,16 @@ class StressThreadWorker implements Runnable {
 
 	private List<Long> everyTimes;
 
-	public StressThreadWorker(StressTestContext stressTestContext, int count) {
+	public StressThreadWorker(StressContext stressContext, int count) {
 		super();
-		this.threadStartBarrier = stressTestContext.getThreadStartBarrier();
-		this.threadEndLatch = stressTestContext.getThreadEndLatch();
-		this.failedCounter = stressTestContext.getFailedCounter();
+		this.threadStartBarrier = stressContext.getThreadStartBarrier();
+		this.threadEndLatch = stressContext.getThreadEndLatch();
+		this.failedCounter = stressContext.getFailedCounter();
 		this.count = count;
 
 		everyTimes = new ArrayList<Long>(count);
 
-		this.service = stressTestContext.getTestService();
+		this.service = stressContext.getTestService();
 	}
 
 	public List<Long> getEveryTimes() {

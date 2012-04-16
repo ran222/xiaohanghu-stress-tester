@@ -1,4 +1,4 @@
-package org.xiaohanghu.stresstester;
+package org.xiaohanghu.stresstester.core;
 
 import java.util.List;
 

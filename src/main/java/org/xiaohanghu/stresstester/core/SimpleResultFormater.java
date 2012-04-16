@@ -1,29 +1,27 @@
-package org.xiaohanghu.stresstester;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+package org.xiaohanghu.stresstester.core;
 
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * @author xiaohanghu
  * */
-public class SimpleResultFormater {
+public class SimpleResultFormater implements StressResultFormater {
 	public static final Log log = LogFactory.getLog(SimpleResultFormater.class);
 
-	public void format(StressTestResult stressTestResult, String serviceName,
-			Writer writer) {
-		long testsTakenTime = stressTestResult.getTestsTakenTime();
-		int totalRequests = stressTestResult.getTotalRequests();
-		int concurrencyLevel = stressTestResult.getConcurrencyLevel();
+	public void format(StressResult stressResult, Writer writer) {
+		long testsTakenTime = stressResult.getTestsTakenTime();
+		int totalRequests = stressResult.getTotalRequests();
+		int concurrencyLevel = stressResult.getConcurrencyLevel();
 
 		float takes = StatisticsUtils.toMs(testsTakenTime);
 
-		List<Long> allTimes = stressTestResult.getAllTimes();
+		List<Long> allTimes = stressResult.getAllTimes();
 		long totaleTimes = StatisticsUtils.getTotal(allTimes);
 
 		// float tps = (totalRequests * 1000) / takes;
@@ -48,15 +46,15 @@ public class SimpleResultFormater {
 
 		StringBuilder view = new StringBuilder();
 
-		if (StringUtils.isNotBlank(serviceName)) {
-			view.append(" Service Name:\t").append(serviceName);
-			view.append("\r\n");
-		}
+		// if (StringUtils.isNotBlank(serviceName)) {
+		// view.append(" Service Name:\t").append(serviceName);
+		// view.append("\r\n");
+		// }
 		view.append(" Concurrency Level:\t").append(concurrencyLevel);
 		view.append("\r\n Time taken for tests:\t").append(takes).append(" ms");
 		view.append("\r\n Complete Requests:\t").append(totalRequests);
 		view.append("\r\n Failed Requests:\t").append(
-				stressTestResult.getFailedRequests());
+				stressResult.getFailedRequests());
 		view.append("\r\n Requests per second:\t").append(tps);
 		view.append("\r\n Time per request:\t")
 				.append(StatisticsUtils.toMs(averageTime)).append(" ms");
@@ -97,10 +95,5 @@ public class SimpleResultFormater {
 
 	}
 
-	public String format(StressTestResult stressTestResult, String serviceName) {
-		StringWriter sw = new StringWriter();
-		format(stressTestResult, serviceName, sw);
-		return sw.toString();
-	}
 
 }
