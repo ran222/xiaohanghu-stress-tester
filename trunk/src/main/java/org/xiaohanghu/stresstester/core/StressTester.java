@@ -16,8 +16,8 @@ import org.apache.commons.logging.LogFactory;
  * Created by IntelliJ IDEA. User: yubaofu Date: 12-2-23 Time: ����6:30 To
  * change this template use File | Settings | File Templates.
  */
-public class StressEngine {
-	private static Log log = LogFactory.getLog(StressEngine.class);
+public class StressTester {
+	private static Log log = LogFactory.getLog(StressTester.class);
 
 	private int defaultWarmUpTime = 1600;
 
@@ -36,7 +36,7 @@ public class StressEngine {
 
 	protected static void warnSelf() {
 		for (int i = 0; i < 50; i++) {
-			StressEngine benchmark = new StressEngine();
+			StressTester benchmark = new StressTester();
 			benchmark.test(10, 100, null, 0);
 		}
 	}
