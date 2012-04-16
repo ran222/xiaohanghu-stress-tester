@@ -1,4 +1,4 @@
-package org.xiaohanghu.stresstester;
+package org.xiaohanghu.stresstester.core;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * @author xiaohanghu
  * */
-public class StressTestResult {
+public class StressResult {
 
 	private int concurrencyLevel;// 并发线程数
 	private int totalRequests;// 总请求次数

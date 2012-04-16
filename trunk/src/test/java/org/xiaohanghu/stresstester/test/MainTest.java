@@ -1,7 +1,7 @@
 package org.xiaohanghu.stresstester.test;
 
-import org.xiaohanghu.stresstester.StressTask;
 import org.xiaohanghu.stresstester.StressTestUtils;
+import org.xiaohanghu.stresstester.core.StressTask;
 
 /**
  * @author xiaohanghu
