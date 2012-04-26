@@ -52,7 +52,7 @@ class StressThreadWorker implements Runnable {
 	}
 
 	protected void doRun() throws Exception {
-		// 记录单词调用时间
+		// 记录单次调用时间
 		// 10000次测试工具耗时2ms
 		for (int i = 0; i < count; i++) {
 			long start = System.nanoTime();
