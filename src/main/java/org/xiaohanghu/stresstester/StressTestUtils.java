@@ -16,25 +16,25 @@ public class StressTestUtils {
 	private static StressTester stressTester = new StressTester();
 	private static SimpleResultFormater simpleResultFormater = new SimpleResultFormater();
 
-	public static StressResult test(int concurrencyLevel, int totalRequests,
+	public static StressResult test(int concurrencyLevel, int totalTasks,
 			StressTask stressTask) {
-		return stressTester.test(concurrencyLevel, totalRequests, stressTask);
+		return stressTester.test(concurrencyLevel, totalTasks, stressTask);
 	}
 
-	public static StressResult test(int concurrencyLevel, int totalRequests,
+	public static StressResult test(int concurrencyLevel, int totalTasks,
 			StressTask stressTask, int warmUpTime) {
-		return stressTester.test(concurrencyLevel, totalRequests, stressTask,
+		return stressTester.test(concurrencyLevel, totalTasks, stressTask,
 				warmUpTime);
 	}
 
-	public static void testAndPrint(int concurrencyLevel, int totalRequests,
+	public static void testAndPrint(int concurrencyLevel, int totalTasks,
 			StressTask stressTask) {
-		testAndPrint(concurrencyLevel, totalRequests, stressTask, null);
+		testAndPrint(concurrencyLevel, totalTasks, stressTask, null);
 	}
 
-	public static void testAndPrint(int concurrencyLevel, int totalRequests,
+	public static void testAndPrint(int concurrencyLevel, int totalTasks,
 			StressTask stressTask, String testName) {
-		StressResult stressResult = test(concurrencyLevel, totalRequests,
+		StressResult stressResult = test(concurrencyLevel, totalTasks,
 				stressTask);
 		String str = format(stressResult);
 		System.out.println(str);

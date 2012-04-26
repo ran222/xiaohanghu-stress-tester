@@ -13,8 +13,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Created by IntelliJ IDEA. User: yubaofu Date: 12-2-23 Time: ����6:30 To
- * change this template use File | Settings | File Templates.
+ * 
+ * @author xiaohanghu
  */
 public class StressTester {
 	private static Log log = LogFactory.getLog(StressTester.class);
@@ -53,20 +53,20 @@ public class StressTester {
 		}
 	}
 
-	public StressResult test(int concurrencyLevel, int totalRequests,
+	public StressResult test(int concurrencyLevel, int totalTasks,
 			StressTask stressTask) {
-		return test(concurrencyLevel, totalRequests, stressTask,
+		return test(concurrencyLevel, totalTasks, stressTask,
 				defaultWarmUpTime);
 	}
 
-	public StressResult test(int concurrencyLevel, int totalRequests,
+	public StressResult test(int concurrencyLevel, int totalTasks,
 			StressTask stressTask, int warmUpTime) {
 
 		if (null == stressTask) {
 			stressTask = emptyTestService;
 		}
 		warmUp(warmUpTime, stressTask);
-		int everyThreadCount = totalRequests / concurrencyLevel;
+		int everyThreadCount = totalTasks / concurrencyLevel;
 		CyclicBarrier threadStartBarrier = new CyclicBarrier(concurrencyLevel);
 		CountDownLatch threadEndLatch = new CountDownLatch(concurrencyLevel);
 		AtomicInteger failedCounter = new AtomicInteger();
@@ -106,8 +106,8 @@ public class StressTester {
 
 		// long limit = end - start;s
 		// long startLimit = testContext.getStartTime() - start;
-		int realTotalRequests = everyThreadCount * concurrencyLevel;
-		int failedRequests = failedCounter.get();
+		int realTotalTasks = everyThreadCount * concurrencyLevel;
+		int failedTasks = failedCounter.get();
 		StressResult stressResult = new StressResult();
 
 		SortResult sortResult = getSortedTimes(workers);
@@ -118,8 +118,8 @@ public class StressTester {
 		long totalTime = trheadTimes.get(trheadTimes.size() - 1);
 
 		stressResult.setTestsTakenTime(totalTime);
-		stressResult.setFailedRequests(failedRequests);
-		stressResult.setTotalRequests(realTotalRequests);
+		stressResult.setFailedTasks(failedTasks);
+		stressResult.setTotalTasks(realTotalTasks);
 		stressResult.setConcurrencyLevel(concurrencyLevel);
 		stressResult.setWorkers(workers);
 
