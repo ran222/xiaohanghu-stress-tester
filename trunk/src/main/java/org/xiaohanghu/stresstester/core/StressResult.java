@@ -10,10 +10,10 @@ import java.util.List;
 public class StressResult {
 
 	private int concurrencyLevel;// 并发线程数
-	private int totalRequests;// 总请求次数
+	private int totalTasks;// 总任务次数
 
 	private long testsTakenTime;// 总耗时
-	private int failedRequests;// 失败请求次数
+	private int failedTasks;// 失败任务次数
 
 	private List<Long> allTimes;// 每次请求的耗时
 
@@ -31,24 +31,24 @@ public class StressResult {
 		this.concurrencyLevel = concurrencyLevel;
 	}
 
-	public int getTotalRequests() {
-		return totalRequests;
+	public int getTotalTasks() {
+		return totalTasks;
 	}
 
-	public void setTotalRequests(int totalRequests) {
-		this.totalRequests = totalRequests;
+	public void setTotalTasks(int totalTasks) {
+		this.totalTasks = totalTasks;
 	}
 
 	public void setTestsTakenTime(long testsTakenTime) {
 		this.testsTakenTime = testsTakenTime;
 	}
 
-	public int getFailedRequests() {
-		return failedRequests;
+	public int getFailedTasks() {
+		return failedTasks;
 	}
 
-	public void setFailedRequests(int failedRequests) {
-		this.failedRequests = failedRequests;
+	public void setFailedTasks(int failedTasks) {
+		this.failedTasks = failedTasks;
 	}
 
 	public List<Long> getAllTimes() {
