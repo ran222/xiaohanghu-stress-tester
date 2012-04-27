@@ -40,6 +40,14 @@ public class StressTestUtils {
 		System.out.println(str);
 	}
 
+	public static void testAndPrint(int concurrencyLevel, int totalTasks,
+			StressTask stressTask, int warmUpTime, String testName) {
+		StressResult stressResult = test(concurrencyLevel, totalTasks,
+				stressTask, warmUpTime);
+		String str = format(stressResult);
+		System.out.println(str);
+	}
+
 	public static String format(StressResult stressResult) {
 		return format(stressResult, simpleResultFormater);
 	}
