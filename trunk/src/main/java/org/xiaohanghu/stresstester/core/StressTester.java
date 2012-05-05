@@ -19,7 +19,7 @@ import org.apache.commons.logging.LogFactory;
 public class StressTester {
 	private static Log log = LogFactory.getLog(StressTester.class);
 
-	private int defaultWarmUpTime = 1600;
+	private int defaultWarmUpTime = 1700;
 
 	private StressTask emptyTestService = new StressTask() {
 		@Override
@@ -42,10 +42,10 @@ public class StressTester {
 	}
 
 	// warm up
-	protected void warmUp(int warmUpTime, StressTask testervice) {
+	protected void warmUp(int warmUpTime, StressTask stressTask) {
 		for (int i = 0; i < warmUpTime; i++) {
 			try {
-				testervice.doTask();
+				stressTask.doTask();
 				// benchmarkWorker.doRun();
 			} catch (Exception e) {
 				log.error("Test exception", e);
