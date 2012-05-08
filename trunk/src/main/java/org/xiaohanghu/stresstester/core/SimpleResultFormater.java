@@ -55,12 +55,12 @@ public class SimpleResultFormater implements StressResultFormater {
 		view.append("\r\n Failed Tasks:\t\t").append(
 				stressResult.getFailedTasks());
 		view.append("\r\n Tasks per second:\t").append(tps);
-		view.append("\r\n Time per task:\t")
+		view.append("\r\n Time per task:\t\t")
 				.append(StatisticsUtils.toMs(averageTime)).append(" ms");
-		view.append("\r\n Time per task:\t")
+		view.append("\r\n Time per task:\t\t")
 				.append(StatisticsUtils.toMs(onTheadAverageTime))
 				.append(" ms (across all concurrent tasks)");
-		view.append("\r\n Shortest task:\t")
+		view.append("\r\n Shortest task:\t\t")
 				.append(StatisticsUtils.toMs(shortestTask)).append(" ms");
 
 		StringBuilder certainTimeView = view;
