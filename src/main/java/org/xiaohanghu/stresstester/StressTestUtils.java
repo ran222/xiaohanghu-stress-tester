@@ -45,6 +45,7 @@ public class StressTestUtils {
 		StressResult stressResult = test(concurrencyLevel, totalTasks,
 				stressTask, warmUpTime);
 		String str = format(stressResult);
+		System.out.println(" " + testName + " test result:");
 		System.out.println(str);
 	}
 
